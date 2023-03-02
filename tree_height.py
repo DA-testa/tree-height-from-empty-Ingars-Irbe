@@ -64,6 +64,7 @@ def main():
     if "I" in text[:1]:
         nr = int(input("cipars: "))
         arr = np.array(list(map(int, input("masivs: ").split())))
+        print(compute_height(nr, arr))
     # arr[0] = 5
 
     # arr1 = np.zeros((5), dtype=int)
@@ -80,7 +81,7 @@ def main():
 
     # print(arr)
     # print(arr1)
-    print(compute_height(nr, arr))
+    
 
 
     # let user input file name to use, don't allow file names with letter a
