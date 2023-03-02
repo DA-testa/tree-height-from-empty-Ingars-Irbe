@@ -60,9 +60,10 @@ def compute_height(n, parents):
 
 def main():
     # implement input form keyboard and from files
-    nr = int(input("cipars: "))
-    arr = np.array(list(map(int, input("masivs: ").split())))
-
+    text = input()
+    if "I" in text[:1]:
+        nr = int(input("cipars: "))
+        arr = np.array(list(map(int, input("masivs: ").split())))
     # arr[0] = 5
 
     # arr1 = np.zeros((5), dtype=int)
