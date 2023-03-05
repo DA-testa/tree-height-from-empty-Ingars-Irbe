@@ -60,16 +60,20 @@ def compute_height(n, parents):
 
 def main():
     # implement input form keyboard and from files
-    text = input("I vai F")
+    text = input("I vai F: ")
     if "I" in text[:1]:
         nr = int(input("cipars: "))
         arr = np.array(list(map(int, input("masivs: ").split())))
         print(compute_height(nr, arr))
-    elif "F" in text[1:]:
-        filename = input()
+    elif "F" in text[:1]:
+        filename = "test/" + input("Fails: ")
+
         file = open(filename, "r")
-        nr = file.readline()
-        arr = np.array(list(map(int, file.readline().split())))
+        nr = int(file.readline())
+        print(nr)
+        arr = file.readline()
+        print(arr)
+        arr = np.array(list(map(int, arr.split())))
         print(compute_height(nr, arr))
     # arr[0] = 5
 
