@@ -15,6 +15,10 @@ def compute_height(n, parents):
     # Cikls kurš iet cauri katram masīva elementam. next'ā saglabājas masīva vērtība
     for i, next in np.ndenumerate(parents): 
         
+        #Pārbauda vai elements ir koka virsotne
+        if next < 0:
+            zero_arr[i] = 1
+
         #Pārbauda vai masīvā zero_arr tekošā elementa vecāka pakāpe nav jau saglabāta
         if zero_arr[next] < 1:
             #Saglabā elementu kuram nav zināma pakāpe
