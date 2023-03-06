@@ -12,49 +12,38 @@ def compute_height(n, parents):
 
     max_height = 0
 
-    for i, next in np.ndenumerate(parents):
-        # print("I: ", i)
-        # print("zero_arr: " , zero_arr)
-        # print("non_value_stack: " , non_value_stack)
-        # print("next: " , next)
-        # print("zero_arr[i]: ",  zero_arr[i])
-        # print("zero_arr[next]: " , zero_arr[next])
-        # print("---===---")
-        if next < 0:
-            zero_arr[i] = 1
-            # print("1")
+    # Cikls kurš iet cauri katram masīva elementam. next'ā saglabājas masīva vērtība
+    for i, next in np.ndenumerate(parents): 
         
-        elif zero_arr[next] < 1:
-            # print("parbaude")
+        #Pārbauda vai masīvā zero_arr tekošā elementa vecāka pakāpe nav jau saglabāta
+        if zero_arr[next] < 1:
+            #Saglabā elementu kuram nav zināma pakāpe
             non_value_stack.append(i)
+            #Ciklā meklē elemntu, kura vecāka pakāpe ir zināma
             while zero_arr[next] < 1:
+                #Pārbauda vai elements ir koka virsotne
                 if next < 0:
                     zero_arr[i] = 1
                     break
+                #Saglabā elementu kuram nav zināma pakāpe
                 non_value_stack.append(next)
                 next = parents[next]
-                # print(zero_arr)
-                # print(non_value_stack)
-                # print(parents)
-                # print("Next: ", next)
-                
+            
+            #Saglabā elementu pakāpes, kas ir stekā
             while non_value_stack:
                 priv = non_value_stack.pop()
                 zero_arr[priv] = zero_arr[next] + 1
                 next = priv
+                
+                #Pārbauda vai tekošā koka elementa pakāpe ir augstākā
                 if zero_arr[priv] > max_height:
                     max_height = zero_arr[priv]
-                # print("cikls 2")
-                # print("non_value_stack: " , non_value_stack)
-                # print("zero_arr: " , zero_arr)
         else:
-            # print("nesahaja")
             zero_arr[i] = zero_arr[next] + 1
+
+            #Pārbauda vai tekošā koka elementa pakāpe ir augstākā
             if zero_arr[i] > max_height:
                     max_height = zero_arr[i]
-
-
-        
 
     return max_height
 
@@ -68,38 +57,13 @@ def main():
     elif "F" in text[:1]:
         filename = "test/" + input("Fails: ")
 
-        file = open(filename, "r")
-        nr = int(file.readline())
-        print(nr)
-        arr = file.readline()
-        print(arr)
-        arr = np.array(list(map(int, arr.split())))
-        print(compute_height(nr, arr))
-    # arr[0] = 5
-
-    # arr1 = np.zeros((5), dtype=int)
-
-    # cipars = arr1[0]
-
-    # print(type(cipars))
-
-    # if arr[0] > 0:
-    #     print("Jā")
-
-    
-    
-
-    # print(arr)
-    # print(arr1)
-    
-
-
-    # let user input file name to use, don't allow file names with letter a
-    # account for github input inprecision
-    
-    # input number of elements
-    # input values in one variable, separate with space, split these values in an array
-    # call the function and output it's result
+        # let user input file name to use, don't allow file names with letter a
+        if filename not in "a":
+            file = open(filename, "r")
+            nr = int(file.readline())
+            arr = file.readline()
+            arr = np.array(list(map(int, arr.split())))
+            print(compute_height(nr, arr))
 
 # In Python, the default limit on recursion depth is rather low,
 # so raise it here for this problem. Note that to take advantage
