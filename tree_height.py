@@ -15,12 +15,13 @@ def compute_height(n, parents):
     # Cikls kurš iet cauri katram masīva elementam. next'ā saglabājas masīva vērtība
     for i, next in np.ndenumerate(parents): 
         
+        print(i)
         #Pārbauda vai elements ir koka virsotne
         if next < 0:
             zero_arr[i] = 1
 
         #Pārbauda vai masīvā zero_arr tekošā elementa vecāka pakāpe nav jau saglabāta
-        if zero_arr[next] < 1:
+        elif zero_arr[next] < 1:
             #Saglabā elementu kuram nav zināma pakāpe
             non_value_stack.append(i)
             #Ciklā meklē elemntu, kura vecāka pakāpe ir zināma
@@ -32,6 +33,11 @@ def compute_height(n, parents):
                 #Saglabā elementu kuram nav zināma pakāpe
                 non_value_stack.append(next)
                 next = parents[next]
+
+                print(zero_arr)
+                print(non_value_stack)
+                print(parents)
+                print("Next: ", next)
             
             #Saglabā elementu pakāpes, kas ir stekā
             while non_value_stack:
@@ -42,13 +48,21 @@ def compute_height(n, parents):
                 #Pārbauda vai tekošā koka elementa pakāpe ir augstākā
                 if zero_arr[priv] > max_height:
                     max_height = zero_arr[priv]
+                
+                print(zero_arr)
+                print(non_value_stack)
+                print(parents)
+                print("Next: ", next)
         else:
             zero_arr[i] = zero_arr[next] + 1
 
             #Pārbauda vai tekošā koka elementa pakāpe ir augstākā
             if zero_arr[i] > max_height:
                     max_height = zero_arr[i]
-
+    print(zero_arr)
+    print(non_value_stack)
+    print(parents)
+    print("Next: ", next)
     return max_height
 
 def main():
